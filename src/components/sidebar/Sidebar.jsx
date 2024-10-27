@@ -31,19 +31,19 @@ const Sidebar = () => {
         <div className="sidebar-menu">
           <ul className="menu-list">
             <li className="menu-item">
+              <Link to="/info" className={`menu-link ${location.pathname === "/info" ? "active" : ""}`}>
+                <span className="menu-link-icon">
+                  <img src={Icons.Info} alt="" />
+                </span>
+                <span className="menu-link-text">Information</span>
+              </Link>
+            </li>
+            <li className="menu-item">
               <Link to="/" className={`menu-link ${location.pathname === "/" ? "active" : ""}`}>
                 <span className="menu-link-icon">
                   <img src={Icons.Chart} alt="" />
                 </span>
                 <span className="menu-link-text">Dashboard</span>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link to="/info" className={`menu-link ${location.pathname === "/info" ? "active" : ""}`}>
-                <span className="menu-link-icon">
-                  <img src={Icons.Info} alt="" />
-                </span>
-                <span className="menu-link-text">Información</span>
               </Link>
             </li>
             <li className="menu-item">
