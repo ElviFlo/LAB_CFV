@@ -51,7 +51,7 @@ const Sidebar = () => {
                 <span className="menu-link-icon">
                   <img src={Icons.Graph} alt="" />
                 </span>
-                <span className="menu-link-text">Gráficas</span>
+                <span className="menu-link-text">Graphs</span>
               </Link>
             </li>
             <li className="menu-item">
@@ -59,7 +59,7 @@ const Sidebar = () => {
                 <span className="menu-link-icon">
                   <img src={Icons.Table} alt="" />
                 </span>
-                <span className="menu-link-text">Tablas</span>
+                <span className="menu-link-text">Tables</span>
               </Link>
             </li>
           </ul>
