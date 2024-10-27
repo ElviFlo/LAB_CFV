@@ -1,408 +1,202 @@
-import styled from "styled-components";
-import { media } from "../../styles/theme/theme";
+import React from "react";
+import { InfoScreenWrap } from "./InfoScreen.styles";
+import airplaneImage from "../../assets/img/airplane.png";
+import { Icons } from "../../assets/icons";
+import pdfFile from '../../assets/diagram/diagram.pdf';
 
-export const InfoScreenWrap = styled.main`
-    margin-top: 20px;
-    padding: 12px 17px;
 
-    .container {
-        background-color: ${(props) => props.theme.colors.white};
-        border-radius: 12px; 
-        box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);        padding: 20px;
-        box-sizing: border-box;
-        padding: 18px 24px;
+const InfoScreen = () => {
+  return (
+    <InfoScreenWrap>
+      <div className="container">
 
-        ${media.xxxl`
-            padding: 14px 12px;
-        `}
-        
-        ${media.xxxl`
-            margin: 12px;
-        `}
-        
-        .banner {
-            display: grid;
-            margin-bottom: 20px;
-            grid-template-columns: 3fr 3fr;
-            align-items: center;
+        {/* Sección Banner */}
+        <div className="banner">
+          <div className="texto-banner">
+            <h4>Welcome to</h4>
+            <h1>FlIGHTS</h1>
+            <p className="banner-paragraph">
+              Explore dynamic insights from flight data and customer statistics,
+              visualized for a comprehensive view of trends, performance, and
+              patterns. Our data-driven approach provides valuable information
+              for analysts, aviation enthusiasts, and business professionals
+              interested in understanding both flight schedules and customer
+              engagement patterns.
+            </p>
 
-            ${media.lg`
-                grid-template-columns: 100%;
-            `}
+            <a 
+              href="https://www.kaggle.com/datasets/mahoora00135/flights?select=flights.csv"
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="button"
+            >
+              See the Database
+            </a>
             
-            .texto-banner {
-                
-               margin-top: 50px;
-               margin-left: 30px;
+          </div>
+          <img src={airplaneImage} alt="Airplane" />
+        </div>
 
-                h4 {
-                    font-weight: 730;
-                    font-size: 30px;
-                    margin-bottom: 0;
-                    line-height: .2;
-                }
 
-                h1 {
-                    font-weight:800;
-                    font-size: 100px;
-                }
+        {/* Segunda sección */}
+        <div className="insights-container">
+          <h2>Why These Insights Matter?</h2>
+          <p>
+            Flight schedules, punctuality, and customer behavior are crucial
+            metrics for improving operational efficiency, understanding consumer
+            demands, and optimizing service delivery. By combining visualization
+            with detailed statistics, this webpage provides a window into these
+            metrics and helps you make informed decisions.
+          </p>
 
-                .banner-paragraph {
-                    font-size: 18px;
-                    text-align: justify;
-                    margin-right: 40px;
-                }
+          <div className="stats">
+            <div className="stat left">
+              <div className="circle">87%</div>
+              <p>Of people prefer traveling</p>
+            </div>
+            <div className="stat right">
+              <div className="circle">16M</div>
+              <p>Flights handled per year</p>
+            </div>
+          </div>
 
-                .button {
-                    display: inline-block;
-                    padding: 10px 10px;
-                    margin-top: 25px;
-                    background-color: #6c63ff;
-                    color: white;
-                    border: none;
-                    border-radius: 18px;
-                    text-decoration: none;
-                    font-weight: bold;
-                    text-align: center;
-                    
-                    &:hover {
-                        background-color: #2126B8;
-                    }
-                }
+          <h2 className="subtittle">Tools Used For The Web Build</h2>
+          <p className="subtittle-description">
+            These are the powerful tools and technologies that we use to create
+            this exceptional website.
+          </p>
 
+          <div className="tools">
+            {
+              [
+                { icon: Icons.Figma, title: "Figma", description: "Design tool" },
+                { icon: Icons.Css, title: "CSS", description: "User Interface" },
+                { icon: Icons.JavaScript, title: "JavaScript", description: "For Interaction" },
+                { icon: Icons.Nodejs, title: "NodeJS", description: "Web Server" },
+                { icon: Icons.Visual, title: "Visual Studio", description: "For Development" },
+                { icon: Icons.MongoDB, title: "PostgreSQL", description: "Used Database" },
+                { icon: Icons.React, title: "React", description: "Framework" },
+                { icon: Icons.Tailwindcss, title: "Tailwindcss", description: "User Interface" },
+              ].map((tool, index) => 
+                  (
+                    <figure key={index} className="tool-item">
+                      <div className="tool-content">
+                        <img src={tool.icon} alt={tool.title} className="tool-icon" />
+                        <div className="tool-text">
+                          <h3>{tool.title}</h3>
+                          <p className="tool-description">{tool.description}</p>
+                        </div>
+                      </div>
+                    </figure>
+                  )
+                )
             }
+          </div>
 
-            
-            img {
-                width: 100%;
-                max-width: 900px;
-                height: auto;
-                border-radius: 8px;
-                display: block;
-                align-self: center; 
-            }
+          <h2 className="subtittle">Data Selected</h2>
+          <p className="subtittle-description">
+            This webpage displays data sourced from our PostgreSQL database, which aggregates flight and 
+            customer information in real-time. Our datasets include the following: 
+          </p>
 
-        }
+          <div className="data-content">
+            <div className="Flight-Statistics">
+              <h3>Flight Statistics</h3>
+              <p>
+                Information such as flight dates, locations, departure and arrival times, 
+                and delay causes. 
+              </p>
+            </div>
+            <div className="Customer-Trends">
+              <h3>Customer Trends</h3>
+              <p>
+                Monthly data on customer types, including new, returning, and 
+                unique visitors.  
+              </p>
+            </div>
 
-        .insights-container {
-            width: 96%;
-            background: #f8f8f9;
-            border-radius: 12px;
-            box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);
-            padding: 20px;
-            margin: 50px auto;
-            align-self: center; 
-            
+          </div>
 
-            h2 {
-                margin-top: 50px;
-                font-weight: 730;
-                font-size: 54px;
-                text-align: center;
-                margin-bottom: 10px;
-            }
+          <h2 className="subtittle">Data Overview</h2>
+          <p className="subtittle-description">
+            Our dataset is organized into multiple tables, each covering different aspects of flight 
+            operations and customer data.  
+          </p>
+          
+          <div className="button-container">
+            <a 
+                href={pdfFile}
+                download
+                className="button"
+              >
+              See the Entity-Relationship Diagram
+            </a>
+          </div>
 
-            p {
-                font-size: 20px;
-                text-align: center;
-                margin: 0;
-                max-width: 800px;
-                margin-left: auto;
-                margin-right: auto;
+          <div className="tables-container">
+            <div className="table-item">
+              <h3>Table Airlines</h3>
+              <ul>
+                <li><strong>airline_id:</strong> A unique identifier for each airline.</li>
+                <li><strong>name:</strong> The name of the airline, which must be unique.</li>
+              </ul>
+            </div>
 
-            }
+            <div className="table-item">
+              <h3>Table Airports</h3>
+              <ul>
+                <li><strong>airport_code:</strong> A unique code for each airport.</li>
+                <li><strong>latitude:</strong> The latitude of the airport's location.</li>
+                <li><strong>longitude:</strong> The longitude of the airport's location.</li>
+              </ul>
+            </div>
 
-            .stats {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-top: 20px;
-                gap: 30px;
+            <div className="table-item">
+              <h3>Table Aircraft</h3>
+              <ul>
+                <li><strong>tailnum:</strong> A unique identifier for each aircraft.</li>
+                <li><strong>airline_id:</strong> A reference to the airline that operates the aircraft.</li>
+              </ul>
+            </div>
+          </div>
 
-                .stat {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    text-align: center;
-                    margin-top: 20px;
+          <div className="tables-container-2">
+            <h3>Table Flights:</h3>
+            <ul>
+              {[
+                { field: "flight_id", description: "A unique identifier for each flight." },
+                { field: "date", description: "The date of the flight." },
+                { field: "year", description: "The year of the flight." },
+                { field: "month", description: "The month of the flight." },
+                { field: "day", description: "The day of the flight." },
+                { field: "dep_time", description: "The actual departure time." },
+                { field: "sched_dep_time", description: "The scheduled departure time." },
+                { field: "dep_delay", description: "The delay in departure time." },
+                { field: "arr_time", description: "The actual arrival time." },
+                { field: "sched_arr_time", description: "The scheduled arrival time." },
+                { field: "arr_delay", description: "The delay in arrival time." },
+                { field: "carrier", description: "The carrier code of the airline." },
+                { field: "flight_number", description: "The flight number assigned by the airline." },
+                { field: "origin", description: "The airport code for the departure airport." },
+                { field: "destination", description: "The airport code for the arrival airport." },
+                { field: "air_time", description: "The time spent in the air." },
+                { field: "distance", description: "The distance traveled during the flight." },
+                { field: "hour", description: "The hour of the flight departure." },
+                { field: "minute", description: "The minute of the flight departure." },
+                { field: "time_hour", description: "A timestamp of the flight's scheduled time." },
+                { field: "tailnum", description: "The aircraft tail number." },
+              ].map((item, index) => (
+                <li key={index}>
+                  <strong>{item.field}:</strong> {item.description}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                    .circle {
-                        display: center;
-                        background-color: #6c63ff;
-                        color: white;
-                        border-radius: 50%;
-                        width: 130px;
-                        height: 130px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-weight: bold;
-                        font-size: 26px;
-                        margin-bottom: 10px;
+        </div>
+      </div>
+    </InfoScreenWrap>
+  );
+};
 
-                    }
-
-
-                    p {
-                        margin-top: 10px;
-                        font-size: 22px;
-                        font-weight: bold;
-                        max-width: 70%;
-                        line-height: 1.2;
-                    }
-
-                }
- 
-            }
-
-            .subtittle{
-                margin-left: 40px;
-                margin-top: 100px;
-                font-weight: 730;
-                font-size: 54px;
-                text-align: center;
-                margin-bottom: 10px;
-                
-            }
-
-            .subtittle-description {
-                font-size: 20px;
-                text-align: center;
-                margin: 0;
-                max-width: 800px;
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: 20px;
-            }
-
-            .tools {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 20px .5px;
-                margin-top: 40px;
-                margin-left: 45px;
-                margin-bottom: 50px;
-            }
-
-            .tool-item {
-                background-color: white;
-                border: 1px solid #e0e0e0;
-                border-radius: 20px;
-                padding: 15px;
-                width: 260px;
-            }
-
-            .tool-content {
-                display: flex;
-                align-items: center;
-            }
-
-            .tool-icon {
-                margin-left: 8px;
-                margin-right: 25px;
-                width: 40px;
-                height: 40px;
-            }
-
-            .tool-text {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .tool-text h3 {
-                margin: 0;
-                font-size: 18px;
-            }
-
-            .tool-description {
-                font-size: 16px;
-                color: #666;
-            }
-            
-            .data-content {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-top: 20px;
-                gap: 30px;
-                margin-bottom: 60px;
-
-                .Flight-Statistics{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    text-align: center;
-                    margin-top: 20px;
-                    border-radius: 20px;
-                    border-color: white;
-                    border-style: solid;
-                    border-width: 4px;
-                    box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);
-                    width: 400px;
-
-                    h3 {
-                        margin-top: 25px;
-                        font-weight: 730;
-                        font-size: 24px;
-                        text-align: center;
-                        margin-bottom: 2px;
-                    }
-                    
-                    p {
-                        font-size: 19px;
-                        color: #666;
-                        padding: .5rem 3rem;
-                        margin-bottom: 25px;
-                    }
-                }
-
-                .Customer-Trends{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    text-align: center;
-                    margin-top: 20px;
-                    border-radius: 20px;
-                    border-color: white;
-                    border-style: solid;
-                    border-width: 4px;
-                    box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);
-                    width: 400px;
-
-                    h3 {
-                        margin-top: 25px;
-                        font-weight: 730;
-                        font-size: 24px;
-                        text-align: center;
-                        margin-bottom: 2px;
-                    }
-                    
-                    p {
-                        font-size: 19px;
-                        color: #666;
-                        padding: .5rem 3rem;
-                        margin-bottom: 25px;
-                    }
-                }
-
-            }
-            
-            .button-container {
-                display: flex;
-                justify-content: center;
-                margin-top: 20px;
-
-                .button {
-                display: inline-block;
-                padding: 10px 20px;
-                margin-top: 10px;
-                background-color: #6c63ff;
-                color: white;
-                border: none;
-                border-radius: 18px;
-                text-decoration: none;
-                font-weight: bold;
-                text-align: center;
-                align-self: center; 
-                margin-bottom: 40px;
-                    
-                &:hover {
-                    background-color: #2126B8;
-                }
-            }
-
-            }
-            
-            .tables-container {
-                display: flex;
-                justify-content: space-between;
-                margin-top: 40px;
-                margin-left: 5px;
-                margin-bottom: 40px;
-            }
-
-            .table-item {
-                background-color: white;
-                border-radius: 12px;
-                box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);
-                padding: 20px;
-                flex: 1;
-                margin: 0 10px;
-
-
-                h3 {
-                    text-align: center;
-                    font-size: 24px;
-                    font-weight: 700;
-                    margin-bottom: 15px;
-                }
-
-                ul {
-                    list-style-type: disc;
-                    padding-left: 20px;
-                    
-                    li {
-                    font-size: 18px;
-                    margin-bottom: 5px;
-                    line-height: 1.5;
-                    margin-bottom: 15px;
-                    margin: 15px;
-                    }
-
-                    strong {
-                    font-weight: bold;
-                    color: #6c63ff;
-                    }
-                }
-            }
-            
-            .tables-container-2 {
-                display: grid;
-                margin-top: 5px;
-                background-color: white;
-                border-radius: 12px;
-                box-shadow: 0 0.125rem 0.25rem rgba(165, 163, 174, 0.3);
-                padding: 30px;
-                justify-items: center;
-                margin-bottom: 50px;
-                margin-left: 15px;
-                margin-right: 13px;
-
-            }
-
-            .tables-container-2 h3 {
-                margin-top: 10px;
-                text-align: center;
-                font-size: 26px;
-                font-weight: 700;
-                margin-bottom: 15px;
-            }
-
-            .tables-container-2 ul {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 20px 50px;
-                list-style-type: disc;
-                padding-left: 20px;
-                max-width: 900px;
-                margin-bottom: 40px;
-
-                li {
-                    font-size: 18px;
-                    margin: 10px 15px; 
-                    line-height: 1.5;
-                    
-                }
-
-                strong {
-                    font-weight: bold;
-                    color: #6c63ff;
-                }
-            }
-            
-            
-            
-        }
-
-    }
-}`;
+export default InfoScreen;
