@@ -9,6 +9,14 @@ import CardProduct from "./icons/card_product.svg";
 import CardCustomer from "./icons/card_customer.svg";
 import Info from "./icons/info.svg";
 import Table from "./icons/table.svg";
+import Css from "./icons/css.svg";
+import Figma from "./icons/figma.svg";
+import JavaScript from "./icons/javascript.svg";
+import React from "./icons/react.svg";
+import Nodejs from "./icons/nodejs.svg";
+import MongoDB from "./icons/mongodb.svg";
+import Tailwindcss from "./icons/tailwindcss.svg";
+import Visual from "./icons/visual.svg";
 
 export const Icons = {
   Analytics,
@@ -22,4 +30,12 @@ export const Icons = {
   CardCustomer,
   Info,
   Table,
+  Css,
+  Figma,
+  JavaScript,
+  React,
+  Nodejs,
+  MongoDB,
+  Tailwindcss,
+  Visual,
 };

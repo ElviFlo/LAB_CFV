@@ -33,7 +33,7 @@ const Sidebar = () => {
             <li className="menu-item">
               <Link to="/" className={`menu-link ${location.pathname === "/" ? "active" : ""}`}>
                 <span className="menu-link-icon">
-                  <img src={Icons.Chart} alt="" />
+                  <img src={Icons.Info} alt="" />
                 </span>
                 <span className="menu-link-text">Dashboard</span>
               </Link>
@@ -41,9 +41,9 @@ const Sidebar = () => {
             <li className="menu-item">
               <Link to="/info" className={`menu-link ${location.pathname === "/info" ? "active" : ""}`}>
                 <span className="menu-link-icon">
-                  <img src={Icons.Info} alt="" />
+                  <img src={Icons.Chart} alt="" />
                 </span>
-                <span className="menu-link-text">Información</span>
+                <span className="menu-link-text">Information</span>
               </Link>
             </li>
             <li className="menu-item">
@@ -51,7 +51,7 @@ const Sidebar = () => {
                 <span className="menu-link-icon">
                   <img src={Icons.Graph} alt="" />
                 </span>
-                <span className="menu-link-text">Gráficas</span>
+                <span className="menu-link-text">Graphs</span>
               </Link>
             </li>
             <li className="menu-item">
@@ -59,7 +59,7 @@ const Sidebar = () => {
                 <span className="menu-link-icon">
                   <img src={Icons.Table} alt="" />
                 </span>
-                <span className="menu-link-text">Tablas</span>
+                <span className="menu-link-text">Tables</span>
               </Link>
             </li>
           </ul>
