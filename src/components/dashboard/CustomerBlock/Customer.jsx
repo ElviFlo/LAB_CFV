@@ -7,8 +7,41 @@ import {
   } from "recharts";
   import { CustomerWrap } from "./Customer.styles";
   import { BlockContentWrap, BlockTitle } from "../../../styles/global/default";
-  import { CUSTOMER_DATA } from "../../../data/mockData";
+  // import { CUSTOMER_DATA } from "../../../data/mockData";
   import PropTypes from "prop-types";
+  import React, { useEffect, useState } from 'react';
+  
+  const CUSTOMER_DATA_ENDPOINT = "http://127.0.0.1:5000/api/months_Delay";
+
+async function fetchCustomerData() {
+  try {
+    const response = await fetch(CUSTOMER_DATA_ENDPOINT);
+    if (!response.ok) {
+      throw new Error("Failed to fetch customer data");
+    }
+    const data = await response.json();
+    
+    // Formateamos los datos para que coincidan con la estructura de CUSTOMER_DATA
+    return data.map((item) => ({
+      month: getMonthName(item.month), // Función para obtener el nombre del mes
+      Departure_Delay: item.aterrizaje,
+      Arrival_Delay: item.despegue,
+    }));
+    
+  } catch (error) {
+    console.error("Error fetching customer data:", error);
+    return [];
+  }
+}
+function getMonthName(monthNumber) {
+  const monthNames = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+  ];
+  return monthNames[monthNumber - 1];
+}
+const CUSTOMER_DATA = await fetchCustomerData();
+  // console.log(CUSTOMER_DATA);
   
   const formatLegendValue = (value, name) => {
     const initialVal = 0;
@@ -21,10 +54,11 @@ import {
     return (
       <span className="custom-legend-item-text-group">
         <span className="custom-legend-item-text">{value.replace("_", " ")}</span>
-        <span className="custom-legend-item-text">${totalVal}</span>
+        <span className="custom-legend-item-text">{(totalVal/12).toFixed(2)} minutes in 2013</span>
       </span>
     );
   };
+
   
   const CustomTooltipContent = ({ payload }) => {
     if (!payload || !payload.length) return null;
@@ -54,11 +88,13 @@ import {
   };
   
   const Customer = () => {
+    
+
     return (
       <CustomerWrap>
         <div className="block-head">
           <BlockTitle className="block-title">
-            <h3>Customer Satisfaction</h3>
+            <h3>Average Departure and Arrival Delay by Month</h3>
           </BlockTitle>
         </div>
         <BlockContentWrap className="area-chart">
@@ -82,7 +118,7 @@ import {
               <Tooltip content={<CustomTooltipContent />} />
               <Area
                 type="monotone"
-                dataKey="last_month"
+                dataKey="Departure_Delay"
                 stroke="#0095FF"
                 fillOpacity={1}
                 fill="url(#colorUv)"
@@ -95,7 +131,7 @@ import {
               <Legend formatter={formatLegendValue} />
               <Area
                 type="monotone"
-                dataKey="this_month"
+                dataKey="Arrival_Delay"
                 stroke="#07E098"
                 fillOpacity={1}
                 fill="url(#colorPv)"

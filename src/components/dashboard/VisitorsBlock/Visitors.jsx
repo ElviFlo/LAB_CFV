@@ -13,8 +13,52 @@ import {
   import { BlockContentWrap, BlockTitle } from "../../../styles/global/default";
   import PropTypes from "prop-types";
   import { VisitorsBlockWrap } from "./Visitors.styles";
-  import { VISITORS_DATA } from "../../../data/mockData";
+  // import { VISITORS_DATA } from "../../../data/mockData";
   
+  async function fetchVisitorsData() {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/average_delay_by_origen");
+      if (!response.ok) {
+        throw new Error("Failed to fetch customer data");
+      }
+      const data = await response.json();
+      const groupedData = {};
+
+      // Agrupar los datos por mes y origen
+      data.forEach(item => {
+          const { month, origin, avg } = item;
+          if (!groupedData[month]) {
+              groupedData[month] = { month: getMonthName(month) };
+          }
+          groupedData[month][origin] = avg;
+      });
+
+      // Convertir el objeto agrupado a un array
+      const formattedData = Object.values(groupedData);
+      console.log("formattedData");
+      console.log(formattedData);
+      
+      // Formateamos los datos para que coincidan con la estructura de CUSTOMER_DATA
+      return formattedData.map((item) => ({
+        month: item.month, // Función para obtener el nombre del mes
+        EWR: item.EWR,
+        JFK: item.JFK,
+        LGA: item.LGA,
+      }));
+      
+    } catch (error) {
+      console.error("Error fetching customer data:", error);
+      return [];
+    }
+  }
+// Función para obtener el nombre del mes
+function getMonthName(monthNumber) {
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return monthNames[monthNumber - 1];
+}
+
+  const VISITORS_DATA = await fetchVisitorsData();
+  console.log(VISITORS_DATA);
   const formatLegendValue = (value) => {
     return value.replace("_", " ");
   };
@@ -52,7 +96,7 @@ import {
       <VisitorsBlockWrap>
         <div className="block-head">
           <BlockTitle className="block-title">
-            <h3>Visitor Insights</h3>
+            <h3>Departure Delay by Origin</h3>
           </BlockTitle>
         </div>
         <BlockContentWrap className="line-chart">
@@ -93,7 +137,7 @@ import {
               <YAxis
                 tickSize={0}
                 axisLine={false}
-                ticks={[100, 200, 300, 400]}
+                ticks={[5, 10, 15, 20, 25]}
                 tick={{
                   fill: "#7B91B0",
                   fontSize: 14,
@@ -103,7 +147,7 @@ import {
               <Legend iconType="square" formatter={formatLegendValue} />
               <ReferenceLine
                 isFront={true}
-                x="May"
+                x="Oct"
                 stroke="#F64E60"
                 strokeDasharray="3 3"
               >
@@ -113,21 +157,21 @@ import {
                 dot={false}
                 strokeWidth={4}
                 type="basis"
-                dataKey="loyal_customer"
+                dataKey="JFK"
                 stroke="#A700FF"
               />
               <Line
                 dot={false}
                 strokeWidth={4}
                 type="basis"
-                dataKey="new_customer"
+                dataKey="EWR"
                 stroke="#F64E60"
               />
               <Line
                 dot={false}
                 strokeWidth={4}
                 type="basis"
-                dataKey="unique_customer"
+                dataKey="LGA"
                 stroke="#3CD856"
               />
             </LineChart>

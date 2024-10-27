@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 export const REVENUE_DATA = [
   {
     day: "Mon",
@@ -39,7 +40,7 @@ export const REVENUE_DATA = [
 export const CUSTOMER_DATA = [
   {
     month: "Jan",
-    last_month: 400,
+    last_month: 100,
     this_month: 240,
   },
   {
@@ -74,6 +75,28 @@ export const CUSTOMER_DATA = [
     this_month: 430,
   },
 ];
+
+// export const [CUSTOMER_DATA, setCustomerData] = useState([]);
+
+// useEffect(() => {
+//   // Hacemos la solicitud al endpoint del backend
+//   fetch("http://127.0.0.1:5000/api/months_Delay")
+//     .then(response => response.json())
+//     .then(data => {
+//       // Transformar los datos para que coincidan con CUSTOMER_DATA
+//       const transformedData = data.map(item => ({
+//         month: new Date(0, item.month - 1).toLocaleString('en', { month: 'short' }), // Convierte el mes a "Jan", "Feb", etc.
+//         last_month: item.aterrizaje,  // "aterrizaje" se convierte en "last_month"
+//         this_month: item.despegue    // "despegue" se convierte en "this_month"
+//       }));
+      
+//       // Guardamos los datos transformados en el estado
+//       setCustomerData(transformedData);
+//     })
+//     .catch(error => {
+//       console.error("Error al obtener los datos del backend:", error);
+//     });
+// }, []); // Usamos un array vacío para que este efecto sólo se ejecute una vez
 
 export const SALES_MAP_DATA = [
   {
